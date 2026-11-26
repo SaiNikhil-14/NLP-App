@@ -1,0 +1,27 @@
+<DOCTYPE html>
+    <html>
+        <head>
+            <title>NLP App | Register page</title>
+        </head>
+        <body>
+            <h1>NLP App</h1>
+
+            <h3>Register Here</h3>
+
+            <!-- We are using post because we are dealing with saving confidential info which we dont want to show in the url.-->
+            <form action="/perform_registration" method="post">
+                <label>Name: </label>
+                <input type="text" placeholder="Enter your name here" name="usr_name" required><br><br>
+                <label>Email: </label>
+                <input type="email" placeholder="Enter your email here" name="usr_email" required><br>
+                <br>
+                <label>Password: </label>
+                <input type="password" placeholder="Enter your password" name="usr_password" required><br>
+                <br>
+                <input type="submit" value="Register">
+            </form>
+
+            <p>Already a member? <a href="/">Login here</a></p>
+        </body>
+    </html>
+</DOCTYPE>
