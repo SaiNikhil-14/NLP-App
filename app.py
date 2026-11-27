@@ -57,5 +57,19 @@ def perform_ner():
     json_output = response.model_dump()
     return render_template('ner.html', response=json_output)
 
+@app.route('/sentiment')
+def sentiment():
+    return render_template('sentiment.html')
+
+@app.route('/perform_sentiment', methods=['post'])
+def perform_sentiment():
+    text = request.form.get('sentiment_text')
+    response = api.analyze_sentiment(text)
+    if response is None:
+        return "Could not parse sentiment"
+
+    result = response.model_dump()
+    return render_template('sentiment.html', result=result)
+
 
 app.run(debug=True)     #By keeping debug=True, no need to hit run button again and again

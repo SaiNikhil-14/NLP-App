@@ -47,3 +47,35 @@ Text:
             continue
 
     raise last_error
+
+
+SentimentLabel = Literal["POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"]
+
+class SentimentResult(BaseModel):
+    sentiment: SentimentLabel = Field(description="Overall sentiment polarity of the text.")
+    confidence: float = Field(ge=0.0, le=1.0, description="Confidence score between 0.0 and 1.0.")
+    summary: str = Field(description="Brief one-sentence explanation of why this sentiment fits.")
+
+def analyze_sentiment(text: str, models: list[str] | None = None) -> SentimentResult:
+    prompt = f"""Analyze the sentiment of the following text using only the allowed sentiment labels.
+Do not guess beyond what is supported by the text.
+
+Text:
+{text}
+"""
+    last_error = None
+    for model_name in (models or FALLBACK_MODELS):
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    response_schema=SentimentResult,
+                ),
+            )
+            return response.parsed
+        except errors.ServerError as e:
+            last_error = e
+            continue
+    raise last_error
