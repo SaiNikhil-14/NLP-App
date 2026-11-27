@@ -8,6 +8,10 @@
 
             <h3>Register Here</h3>
 
+            {% if message %}
+                <p style="color:red">Email already exists</p>
+            {% endif %}
+
             <!-- We are using post because we are dealing with saving confidential info which we dont want to show in the url.-->
             <form action="/perform_registration" method="post">
                 <label>Name: </label>

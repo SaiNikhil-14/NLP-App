@@ -11,5 +11,5 @@ class Database:
                 users[email] = [name, password]
 
         with open('users.json', 'w') as wf:
-            json.dump(users, wf)
+            json.dump(users, wf, indent=4)
             return 1

@@ -23,14 +23,15 @@ def perfrom_reg():
     response = db.insert(name, email, password)
 
     if response:
-        return "Registration Successful"
+        return render_template('login.html', message='Registration successful. Kindly login here.')
     else:
-        return "Email already exists"
+        return render_template('register.html', message='Email already exists')
 
 @app.route('/Verify', methods=['post'])
 def verify():
     email = request.form.get('entered_email')
     password = request.form.get('entered_password')
+
     
 
 app.run(debug=True)     #By keeping debug=True, no need to hit run button again and again

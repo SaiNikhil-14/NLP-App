@@ -8,6 +8,11 @@
 
         <h3>Login Here</h3>
 
+        <!-- Jinja template is wrtitng python if-else and loops in html-->
+        {% if message %}
+            <p style="color:green">{{ message }}</p>
+        {% endif %}
+
         <form action="/Verify" method="post">
             <label>Email: </label>
             <input type="email" placeholder="Enter your email here" name="entered_email" required><br>
