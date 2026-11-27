@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request        #Here render_template is used for returning the html file and request is used for getting the data from a file.
 from database import Database   #The class which we created
 
 db = Database()
