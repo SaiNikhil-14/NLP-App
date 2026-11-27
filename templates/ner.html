@@ -9,5 +9,12 @@
             <textarea name="ner_text"></textarea><br><br>
             <input type="submit" value="Perform NER">
         </form>
+
+        {% if response %}
+            <!-- We found the structure of the json using json viewer and according to the structure we made a loop-->
+            {%for i in response.entities:%}
+                <p>{{i.text}} -> {{i.label}}</p>
+            {% endfor %}
+        {% endif %}
     </body>
 </html>

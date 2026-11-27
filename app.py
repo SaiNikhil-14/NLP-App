@@ -54,12 +54,8 @@ def ner():
 def perform_ner():
     text = request.form.get('ner_text')
     response = api.extract_entities(text)
-    json_output = response.model_dump_json()
-    print(json_output)
-
-    for i in response['entities']:
-        print(i['text'], i['label'])
-    return "Something"
+    json_output = response.model_dump()
+    return render_template('ner.html', response=json_output)
 
 
 app.run(debug=True)     #By keeping debug=True, no need to hit run button again and again
